@@ -22,14 +22,14 @@
          * Funcion que resplada en caso de problemas con simbolos ortograficos
          */
         public function set_names() {
-            return $this->dbh->query("SET NAMES 'utf-8'");
+            return $this->dbh->query("SET NAMES 'utf8'");
         }
 
         /**
          * Funcion que redireccion a login o pantalla inicial segun sea el caso.
          */
         public static function ruta() {
-            return "http://localhost/ControlAcceso/";
+            return "http://localhost/gitHub/ControlAcceso/";
         }
 
     }
