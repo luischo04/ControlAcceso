@@ -10,7 +10,7 @@
 					</a>
 				</li>
                 <li class="blue-dirty">
-					<a href="../Home/">
+					<a href="../usuarios/">
 						<span class="glyphicon glyphicon-user"></span>
 						<span class="lbl">Usuarios</span>
 					</a>

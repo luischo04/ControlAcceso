@@ -35,5 +35,14 @@
             }
         }
 
+        public function get_usuario(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT * FROM sca_usuarios";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
     }
 ?>
