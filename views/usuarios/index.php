@@ -57,7 +57,7 @@
 	</div>
 	<!-- Contenido -->
 
-	<?php //require_once("modalUsuario.php");?>
+	<?php require_once("modalUsuario.php"); ?>
 
 	<?php require_once("../scripts/js.php");?>
 	

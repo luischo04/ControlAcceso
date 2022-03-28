@@ -6,11 +6,11 @@ function init(){
     });
 }
 
-/*function guardaryeditar(e){
+function guardaryeditar(e){
     e.preventDefault();
 	var formData = new FormData($("#usuario_form")[0]);
     $.ajax({
-        url: "../../controller/usuario.php?op=guardaryeditar",
+        url: "../../controllers/usuario.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -22,14 +22,14 @@ function init(){
             $('#usuario_data').DataTable().ajax.reload();
 
             swal({
-                title: "HelpDesk!",
+                title: "Control de Acceso",
                 text: "Completado.",
                 type: "success",
                 confirmButtonClass: "btn-success"
             });
         }
     }); 
-}*/
+}
 
 $(document).ready(function(){
     tabla=$('#usuario_data').dataTable({
@@ -85,27 +85,28 @@ $(document).ready(function(){
     }).DataTable(); 
 });
 
-/* function editar(usu_id){
+function editar(id_usuario){
     $('#mdltitulo').html('Editar Registro');
 
-    $.post("../../controller/usuario.php?op=mostrar", {usu_id : usu_id}, function (data) {
+    $.post("../../controllers/usuario.php?op=mostrar", {id_usuario : id_usuario}, function (data) {
         data = JSON.parse(data);
-        $('#usu_id').val(data.usu_id);
-        $('#usu_nom').val(data.usu_nom);
-        $('#usu_ape').val(data.usu_ape);
-        $('#usu_correo').val(data.usu_correo);
-        $('#usu_pass').val(data.usu_pass);
-        $('#rol_id').val(data.rol_id).trigger('change');
-        $('#usu_telf').val(data.usu_telf);
+        $('#id_usuario').val(data.id_usuario);
+        $('#nom_usuario').val(data.nom_usuario);
+        $('#ape_usuario').val(data.ape_usuario);
+        $('#usuario').val(data.usuario);
+        $('#password').val(data.password);
+        $('#nacimiento_usuario').val(data.nacimiento_usuario);
+        $('#id_rol').val(data.id_rol).trigger('change');
+        $('#sexo').val(data.sexo).trigger('change');
     }); 
 
     $('#modalmantenimiento').modal('show');
 }
 
-function eliminar(usu_id){
+function eliminar(id_usuario){
     swal({
-        title: "HelpDesk",
-        text: "Esta seguro de Eliminar el registro?",
+        title: "Control de Acceso",
+        text: "¿Esta seguro de Eliminar el usuario?",
         type: "error",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -115,7 +116,7 @@ function eliminar(usu_id){
     },
     function(isConfirm) {
         if (isConfirm) {
-            $.post("../../controller/usuario.php?op=eliminar", {usu_id : usu_id}, function (data) {
+            $.post("../../controllers/usuario.php?op=eliminar", {id_usuario : id_usuario}, function (data) {
 
             }); 
 
@@ -129,10 +130,10 @@ function eliminar(usu_id){
             });
         }
     });
-} */
+}
 
 $(document).on("click","#btnnuevo", function(){
-    $('#usu_id').val('');
+    $('#id_usuario').val('');
     $('#mdltitulo').html('Nuevo Registro');
     $('#usuario_form')[0].reset();
     $('#modalmantenimiento').modal('show');
