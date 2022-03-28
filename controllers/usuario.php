@@ -4,15 +4,6 @@
     $usuario = new Usuario();
 
     switch($_GET["op"]){
-        /*case "guardaryeditar":
-            if(empty($_POST["usu_id"])){       
-                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"],$_POST["usu_telf"]);     
-            }
-            else {
-                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"],$_POST["usu_telf"]);
-            }
-            break;*/
-
         case "listar":
             $datos=$usuario->get_usuario();
             $data= Array();
@@ -45,7 +36,35 @@
                 "iTotalDisplayRecords"=>count($data),
                 "aaData"=>$data);
             echo json_encode($results);
-            break;
+        break;
+        case "guardaryeditar":
+            if(empty($_POST["id_usuario"])){       
+                $usuario->insert_usuario($_POST["usuario"], $_POST["password"], $_POST["nom_usuario"], $_POST["ape_usuario"], $_POST["nacimiento_usuario"], $_POST["sexo"], $_POST["id_rol"]);  
+            }
+            else {
+                $usuario->update_usuario($_POST["id_usuario"], $_POST["usuario"], $_POST["password"], $_POST["nom_usuario"], $_POST["ape_usuario"], $_POST["nacimiento_usuario"], $_POST["sexo"], $_POST["id_rol"]);
+            }
+        break;
+        case "mostrar";
+            $datos=$usuario->get_usuario_x_id($_POST["id_usuario"]);  
+            if(is_array($datos)==true and count($datos)>0){
+                foreach($datos as $row)
+                {
+                    $output["id_usuario"] = $row["id_usuario"];
+                    $output["nom_usuario"] = $row["nom_usuario"];
+                    $output["ape_usuario"] = $row["ape_usuario"];
+                    $output["usuario"] = $row["usuario"];
+                    $output["password"] = $row["password"];
+                    $output["id_rol"] = $row["id_rol"];
+                    $output["sexo"] = $row["sexo"];
+                    $output["nacimiento_usuario"] = $row["nacimiento_usuario"];
+                }
+                echo json_encode($output);
+            }   
+        break;
+        case "eliminar":
+            $usuario->delete_usuario($_POST["id_usuario"]);
+        break;
     }
 
 ?>

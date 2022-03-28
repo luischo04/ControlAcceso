@@ -44,5 +44,68 @@
             return $resultado=$sql->fetchAll();
         }
 
+        public function insert_usuario($usuario, $password, $nom_usuario, $ape_usuario, $nacimiento_usuario, $sexo, $id_rol){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="INSERT INTO sca_usuarios (id_usuario, usuario, password, nom_usuario, ape_usuario, nacimiento_usuario, sexo, id_rol, activo_usuario, fecha_creacion, fecha_actualizacion, fecha_eliminado) VALUES (NULL,?,?,?,?,?,?,?,'1',now(), NULL, NULL);";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usuario);
+            $sql->bindValue(2, $password);
+            $sql->bindValue(3, $nom_usuario);
+            $sql->bindValue(4, $ape_usuario);
+            $sql->bindValue(5, $nacimiento_usuario);
+            $sql->bindValue(6, $sexo);
+            $sql->bindValue(7, $id_rol);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function update_usuario($id_usuario, $usuario, $password, $nom_usuario, $ape_usuario, $nacimiento_usuario, $sexo, $id_rol){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="UPDATE sca_usuarios SET
+                usuario = ?,
+                password = ?,
+                nom_usuario = ?,
+                ape_usuario = ?,
+                nacimiento_usuario = ?,
+                sexo = ?,
+                id_rol = ?,
+                fecha_actualizacion = now()
+                WHERE
+                id_usuario = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usuario);
+            $sql->bindValue(2, $password);
+            $sql->bindValue(3, $nom_usuario);
+            $sql->bindValue(4, $ape_usuario);
+            $sql->bindValue(5, $nacimiento_usuario);
+            $sql->bindValue(6, $sexo);
+            $sql->bindValue(7, $id_rol);
+            $sql->bindValue(8, $id_usuario);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function get_usuario_x_id($id_usuario){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT * FROM sca_usuarios WHERE id_usuario = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $id_usuario);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function delete_usuario($id_usuario){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="DELETE FROM sca_usuarios WHERE id_usuario = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $id_usuario);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
     }
 ?>
