@@ -40,7 +40,7 @@
                         <input type="email" class="form-control" id="usuario" name="usuario" placeholder="test@test.com" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="pass">
                         <label class="form-label" for="password">Contraseña</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="**********" required>
                     </div>

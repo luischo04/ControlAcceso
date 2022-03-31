@@ -21,8 +21,9 @@
                         <span class="lbl">Residentes</span>
                     </span>
                     <ul>
-                        <li><a href="profile.html"><span class="lbl">Entradas</span></a></li>
-                        <li><a href="profile-2.html"><span class="lbl">Salidas</span></a></li>
+                        <li><a href="../residentes/direcciones.php"><span class="lbl">Direcciones</span></a></li>
+                        <li><a href="../residentes/colonos.php"><span class="lbl">Colonos</span></a></li>
+                        <li><a href="../residentes/movimientos_cl.php">Entradas / Salidas</a></li>
                     </ul>
                 </li>
 				<li class="blue-dirty with-sub">
@@ -70,8 +71,8 @@
                         <span class="lbl">Residentes</span>
                     </span>
                     <ul>
-                        <li><a href="profile.html"><span class="lbl">Entradas</span></a></li>
-                        <li><a href="profile-2.html"><span class="lbl">Salidas</span></a></li>
+                        <li><a href="../residentes_sg/registro_rs.php"><span class="lbl">Nuevo registro</span></a></li>
+                        <li><a href="../residentes_sg/consultar_registro_rs.php"><span class="lbl">Consultar registros</span></a></li>
                     </ul>
                 </li>
 				<li class="blue-dirty with-sub">
@@ -80,8 +81,8 @@
                         <span class="lbl">Visitas</span>
                     </span>
                     <ul>
-                        <li><a href="profile.html"><span class="lbl">Entradas</span></a></li>
-                        <li><a href="profile-2.html"><span class="lbl">Salidas</span></a></li>
+                        <li><a href="profile.html"><span class="lbl">Nuevo registro</span></a></li>
+                        <li><a href="profile-2.html"><span class="lbl">Consultar registros</span></a></li>
                     </ul>
                 </li>
                 <li class="blue-dirty with-sub">
@@ -90,8 +91,8 @@
                         <span class="lbl">Provedores</span>
                     </span>
                     <ul>
-                        <li><a href="profile.html"><span class="lbl">Entradas</span></a></li>
-                        <li><a href="profile-2.html"><span class="lbl">Salidas</span></a></li>
+                        <li><a href="profile.html"><span class="lbl">Nuevo registro</span></a></li>
+                        <li><a href="profile-2.html"><span class="lbl">Consultar registros</span></a></li>
                     </ul>
                 </li>
 				<li class="blue-dirty">

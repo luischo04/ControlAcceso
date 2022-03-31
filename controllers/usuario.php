@@ -42,7 +42,7 @@
                 $usuario->insert_usuario($_POST["usuario"], $_POST["password"], $_POST["nom_usuario"], $_POST["ape_usuario"], $_POST["nacimiento_usuario"], $_POST["sexo"], $_POST["id_rol"]);  
             }
             else {
-                $usuario->update_usuario($_POST["id_usuario"], $_POST["usuario"], $_POST["password"], $_POST["nom_usuario"], $_POST["ape_usuario"], $_POST["nacimiento_usuario"], $_POST["sexo"], $_POST["id_rol"]);
+                $usuario->update_usuario($_POST["id_usuario"], $_POST["usuario"], $_POST["nom_usuario"], $_POST["ape_usuario"], $_POST["nacimiento_usuario"], $_POST["sexo"], $_POST["id_rol"]);
             }
         break;
         case "mostrar";

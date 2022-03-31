@@ -1,26 +1,25 @@
 var tabla;
 
 function init(){
-    $("#usuario_form").on("submit",function(e){
-        guardaryeditar(e);	
+    $("#direccion_form").on("submit",function(e){
+        guardaryeditardr(e);	
     });
 }
 
-function guardaryeditar(e){
+function guardaryeditardr(e){
     e.preventDefault();
-	var formData = new FormData($("#usuario_form")[0]);
+	var formData = new FormData($("#direccion_form")[0]);
     $.ajax({
-        url: "../../controllers/usuario.php?op=guardaryeditar",
+        url: "../../controllers/residentes.php?op=guardaryeditardr",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
         success: function(datos){    
             console.log(datos);
-            $('#usuario_form')[0].reset();
-            $('#pass').show();
-            $("#modalmantenimiento").modal('hide');
-            $('#usuario_data').DataTable().ajax.reload();
+            $('#direccion_form')[0].reset();
+            $("#modaldireccion").modal('hide');
+            $('#direccion_data').DataTable().ajax.reload();
 
             swal({
                 title: "Control de Acceso",
@@ -33,7 +32,7 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
-    tabla=$('#usuario_data').dataTable({
+    tabla=$('#direccion_data').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -47,7 +46,7 @@ $(document).ready(function(){
                 'pdfHtml5'
                 ],
         "ajax":{
-            url: '../../controllers/usuario.php?op=listar',
+            url: '../../controllers/residentes.php?op=listardr',
             type : "post",
             dataType : "json",						
             error: function(e){
@@ -86,28 +85,23 @@ $(document).ready(function(){
     }).DataTable(); 
 });
 
-function editar(id_usuario){
-    $('#mdltitulo').html('Editar Registro');
+function editar(id_direccion){
+    $('#mdltitulo').html('Editar Direccion');
 
-    $.post("../../controllers/usuario.php?op=mostrar", {id_usuario : id_usuario}, function (data) {
+    $.post("../../controllers/residentes.php?op=mostrardr", {id_direccion : id_direccion}, function (data) {
         data = JSON.parse(data);
-        $('#id_usuario').val(data.id_usuario);
-        $('#nom_usuario').val(data.nom_usuario);
-        $('#ape_usuario').val(data.ape_usuario);
-        $('#usuario').val(data.usuario);
-        $('#password').val(data.password);
-        $('#nacimiento_usuario').val(data.nacimiento_usuario);
-        $('#id_rol').val(data.id_rol).trigger('change');
-        $('#sexo').val(data.sexo).trigger('change');
+        $('#id_direccion').val(data.id_direccion);
+        $('#direccion').val(data.direccion);
+        $('#inf_casa').val(data.inf_casa);
     }); 
-    $('#pass').hide();
-    $('#modalmantenimiento').modal('show');
+
+    $('#modaldireccion').modal('show');
 }
 
-function eliminar(id_usuario){
+function eliminar(id_direccion){
     swal({
         title: "Control de Acceso",
-        text: "¿Esta seguro de Eliminar el usuario?",
+        text: "¿Esta seguro de Eliminar esta direccion?",
         type: "error",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -117,15 +111,15 @@ function eliminar(id_usuario){
     },
     function(isConfirm) {
         if (isConfirm) {
-            $.post("../../controllers/usuario.php?op=eliminar", {id_usuario : id_usuario}, function (data) {
+            $.post("../../controllers/residentes.php?op=eliminardr", {id_direccion : id_direccion}, function (data) {
 
             }); 
 
-            $('#usuario_data').DataTable().ajax.reload();	
+            $('#direccion_data').DataTable().ajax.reload();	
 
             swal({
-                title: "HelpDesk!",
-                text: "Registro Eliminado.",
+                title: "Control de Acceso",
+                text: "Direccion Eliminada.",
                 type: "success",
                 confirmButtonClass: "btn-success"
             });
@@ -134,10 +128,10 @@ function eliminar(id_usuario){
 }
 
 $(document).on("click","#btnnuevo", function(){
-    $('#id_usuario').val('');
+    $('#id_direccion').val('');
     $('#mdltitulo').html('Nuevo Registro');
-    $('#usuario_form')[0].reset();
-    $('#modalmantenimiento').modal('show');
+    $('#direccion_form')[0].reset();
+    $('#modaldireccion').modal('show');
 });
 
 init();
