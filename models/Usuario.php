@@ -60,12 +60,11 @@
             return $resultado=$sql->fetchAll();
         }
 
-        public function update_usuario($id_usuario, $usuario, $password, $nom_usuario, $ape_usuario, $nacimiento_usuario, $sexo, $id_rol){
+        public function update_usuario($id_usuario, $usuario, $nom_usuario, $ape_usuario, $nacimiento_usuario, $sexo, $id_rol){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE sca_usuarios SET
                 usuario = ?,
-                password = ?,
                 nom_usuario = ?,
                 ape_usuario = ?,
                 nacimiento_usuario = ?,
@@ -76,13 +75,12 @@
                 id_usuario = ?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usuario);
-            $sql->bindValue(2, $password);
-            $sql->bindValue(3, $nom_usuario);
-            $sql->bindValue(4, $ape_usuario);
-            $sql->bindValue(5, $nacimiento_usuario);
-            $sql->bindValue(6, $sexo);
-            $sql->bindValue(7, $id_rol);
-            $sql->bindValue(8, $id_usuario);
+            $sql->bindValue(2, $nom_usuario);
+            $sql->bindValue(3, $ape_usuario);
+            $sql->bindValue(4, $nacimiento_usuario);
+            $sql->bindValue(5, $sexo);
+            $sql->bindValue(6, $id_rol);
+            $sql->bindValue(7, $id_usuario);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }

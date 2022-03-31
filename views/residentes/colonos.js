@@ -1,26 +1,28 @@
 var tabla;
 
 function init(){
-    $("#usuario_form").on("submit",function(e){
-        guardaryeditar(e);	
+    $("#colono_form").on("submit",function(e){
+        guardaryeditarcl(e);	
     });
 }
 
-function guardaryeditar(e){
+$.post("../../controllers/residentes.php?op=combocl",function(data, status){
+    $('#id_direccion').html(data);
+});
+
+function guardaryeditarcl(e){
     e.preventDefault();
-	var formData = new FormData($("#usuario_form")[0]);
+	var formData = new FormData($("#colono_form")[0]);
     $.ajax({
-        url: "../../controllers/usuario.php?op=guardaryeditar",
+        url: "../../controllers/residentes.php?op=guardaryeditarcl",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
         success: function(datos){    
-            console.log(datos);
-            $('#usuario_form')[0].reset();
-            $('#pass').show();
-            $("#modalmantenimiento").modal('hide');
-            $('#usuario_data').DataTable().ajax.reload();
+            $('#colono_form')[0].reset();
+            $("#modalcolono").modal('hide');
+            $('#colono_data').DataTable().ajax.reload();
 
             swal({
                 title: "Control de Acceso",
@@ -33,7 +35,7 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
-    tabla=$('#usuario_data').dataTable({
+    tabla=$('#colono_data').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -47,7 +49,7 @@ $(document).ready(function(){
                 'pdfHtml5'
                 ],
         "ajax":{
-            url: '../../controllers/usuario.php?op=listar',
+            url: '../../controllers/residentes.php?op=listarcl',
             type : "post",
             dataType : "json",						
             error: function(e){
@@ -86,28 +88,27 @@ $(document).ready(function(){
     }).DataTable(); 
 });
 
-function editar(id_usuario){
+function editarcl(id_colono){
     $('#mdltitulo').html('Editar Registro');
 
-    $.post("../../controllers/usuario.php?op=mostrar", {id_usuario : id_usuario}, function (data) {
+    $.post("../../controllers/residentes.php?op=mostrarcl", {id_colono : id_colono}, function (data) {
         data = JSON.parse(data);
-        $('#id_usuario').val(data.id_usuario);
-        $('#nom_usuario').val(data.nom_usuario);
-        $('#ape_usuario').val(data.ape_usuario);
-        $('#usuario').val(data.usuario);
-        $('#password').val(data.password);
-        $('#nacimiento_usuario').val(data.nacimiento_usuario);
-        $('#id_rol').val(data.id_rol).trigger('change');
+        $('#id_colono').val(data.id_colono);
+        $('#nom_colono').val(data.nom_colono);
+        $('#ape_colono').val(data.ape_colono);
+        $('#telefono').val(data.telefono);
+        $('#id_direccion').val(data.id_direccion).trigger('change');
         $('#sexo').val(data.sexo).trigger('change');
+        $('#activo_colono').val(data.activo_colono).trigger('change'); 
     }); 
-    $('#pass').hide();
-    $('#modalmantenimiento').modal('show');
+
+    $('#modalcolono').modal('show');
 }
 
-function eliminar(id_usuario){
+function eliminarcl(id_colono){
     swal({
         title: "Control de Acceso",
-        text: "¿Esta seguro de Eliminar el usuario?",
+        text: "¿Esta seguro de Eliminar el colono?",
         type: "error",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -117,14 +118,14 @@ function eliminar(id_usuario){
     },
     function(isConfirm) {
         if (isConfirm) {
-            $.post("../../controllers/usuario.php?op=eliminar", {id_usuario : id_usuario}, function (data) {
+            $.post("../../controllers/residentes.php?op=eliminarcl", {id_colono : id_colono}, function (data) {
 
             }); 
 
-            $('#usuario_data').DataTable().ajax.reload();	
+            $('#colono_data').DataTable().ajax.reload();	
 
             swal({
-                title: "HelpDesk!",
+                title: "Control Acceso",
                 text: "Registro Eliminado.",
                 type: "success",
                 confirmButtonClass: "btn-success"
@@ -134,10 +135,10 @@ function eliminar(id_usuario){
 }
 
 $(document).on("click","#btnnuevo", function(){
-    $('#id_usuario').val('');
+    $('#id_colono').val('');
     $('#mdltitulo').html('Nuevo Registro');
-    $('#usuario_form')[0].reset();
-    $('#modalmantenimiento').modal('show');
+    $('#colono_form')[0].reset();
+    $('#modalcolono').modal('show');
 });
 
 init();
